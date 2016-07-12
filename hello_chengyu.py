@@ -11,16 +11,20 @@ import chengyu_data as cd
 
 def print_chengyu(language, chengyu_id):
     """Prints a chengyu or Chinese proverb alongside the English translation and meaning."""
-    if language == 'zh_cn':
-        language_format = cd.zh_cn_format
+    if language == 'zh':
+        language_format = cd.zh_format
     else:
         language_format = cd.en_format
 
     jd = json.dumps(cd.chengyu, ensure_ascii=False)
     jl = json.loads(jd)
-    output = jl.get(chengyu_id)
-    for k, v in output.items():
-        print(u'{0}: {1}'.format(k, v))
+    chengyu_dict = jl.get(chengyu_id)
+
+    zhm = chengyu_dict[u'zh_meaning']
+    enm = chengyu_dict[u'en_meaning']
+    ene = chengyu_dict[u'en_equivalent']
+    print(cd.printcy.format(chengyu_dict['chengyu'], chengyu_dict['pinyin'], zhm, enm, ene,
+            language_format[0], language_format[1], language_format[2]))
 
 def randomize():
 	"""Generate a random number associated with a chengyu to print to terminal."""
