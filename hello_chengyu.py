@@ -9,6 +9,14 @@ import json
 
 import chengyu_data as cd
 
+def select_language():
+    """Select a language for the program."""
+    language = input("What language would you like to use? [en, zh]: ") 
+    if language not in ['en', 'zh']:
+        print("Please choose 'zh' or 'en'")
+        language = 'en'
+    return language
+
 def print_chengyu(language, chengyu_id):
     """Prints a chengyu or Chinese proverb alongside the English translation and meaning."""
     if language == 'zh':
